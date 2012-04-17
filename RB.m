@@ -1,25 +1,13 @@
 function [outRB bestdecision]=RB(map,centerdecison,sensor,sensorT)
 global CF;
 global CD;
+global C;
 [decisionnumber sensornumber]=size(map);
-bestdecision=zeros(1,sensornumber^2);
-outRB=0;
+bestdecision=zeros(2^sensornumber,1);
+outRB=C;
 for i=1:1:decisionnumber
-    puh0=1;
-    puh1=1;
-    for j=1:1:sensornumber
-        y1=sensor(1+(j-1)*2,:);
-        y0=sensor(2+(j-1)*2,:);
-        lammda=log(y1./y0);
-        [pf,pd]= f(y0,y1,lammda,sensorT(j));
-        if map(i,j)==1
-            puh0=puh0*pf;
-            puh1=puh1*pd;
-        else
-            puh0=puh0*(1-pf);
-            puh1=puh1*(1-pd);
-        end
-    end
+    
+    [puh0 puh1]=puh(map(i,:),sensor,sensorT,0);
     if (CF*puh0-CD*puh1)<0
         bestdecision(i)=1;
     end
