@@ -8,16 +8,16 @@ C01=1;
 CF=P0*(C10-C00);CD=P1(C01-C11);
 C=C01*P1+C00*P0;
 RESOLUTION=.05;
-STOP=0.001;
+STOP=0;
 SENSORNUMBER=7;
 x=-10:RESOLUTION:14;
-y11=pdf(2,x);
+y11=pdf(1,x);
 y10=pdf(0,x);
 y21=pdf(1,x);
 y20=y10;
-y31=pdf(3,x);
+y31=pdf(1.5,x);
 y30=y10;
-y41=pdf(4,x);
+y41=pdf(2,x);
 y40=y10;
 y51=pdf(1.4,x);
 y50=y10;
@@ -33,7 +33,7 @@ bestdecision=ceil(randn(2^SENSORNUMBER,1)*.1);
 sensorT=[-10 -10 -10 -10 -10 -10 -10];
 sensor=[y11;y10;y21;y20;y31;y30;y41;y40;y51;y50;y61;y60;y71;y70];
 breaksign=1;
-while (breaksign<=20)
+while (breaksign==1)
     [R_B bestdecision(:,1)]=RB(sensoru(SENSORNUMBER),bestdecision, sensor,sensorT);
     R_B
 %     out(breaksign)=bestdecision';
@@ -42,10 +42,10 @@ while (breaksign<=20)
     end
     
     [R_B2 tmp]=RB(sensoru(SENSORNUMBER),bestdecision, sensor,sensorT);
-    breaksign=breaksign+1;
-%     if(R_B-R_B2<STOP)
-%         breaksign=0;
-%     end
+   
+    if(R_B-R_B2<=STOP)
+        breaksign=0;
+    end
 end
 
 R_B2
