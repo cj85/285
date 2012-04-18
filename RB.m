@@ -13,4 +13,3 @@ for i=1:1:decisionnumber
     end
     outRB=outRB+centerdecison(i)*(CF*puh0-CD*puh1);
 end
-

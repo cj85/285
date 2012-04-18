@@ -1,9 +1,8 @@
 global RESOLUTION CF CD STOP SENSORNUMBER C P0 P1 C10 C11 C00 C01;
 i=1;
-% for P0=0:0.001:1
-P0=1/2;
+for P0=0:0.001:1
+% P0=1/2;
 P1=1-P0;
-
 C10=1;
 C11=0;
 C00=0;
@@ -53,15 +52,14 @@ end
 % bestdecision
 
    
-%     x1(i)=P0;
-%     [tmp T1]=RBsensor(1,sensor);
-%     [tmp T2]=RBsensor(2,sensor);
-%     [tmp T3]=RBsensor(3,sensor);
-%    y1(i)= T1;
-%    y2(i)=T2;
-%    y3(i)=T3;
-%   
-%    i=i+1;
-% end
-% w=[y1;y2;y3];
-% plot(x1,w)
+    x1(i)=P0;
+    [tmp T1]=RBsensor(1,sensor);
+    
+   y1(i)= exp(sensorT(1));
+   y2(i)=exp(sensorT(2));
+%    y3(i)=exp(sensorT(3));
+  
+   i=i+1;
+end
+w=[y1;y2];
+plot(x1,w)
