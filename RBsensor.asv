@@ -1,8 +1,0 @@
-function y=RBsensor(k,sensor,sensorT)
-global RESOLUTION CF CD STOP SENSORNUMBER C P0 P1 C10 C11 C00 C01;
-        y1=sensor(1+(k-1)*2,:);
-        y0=sensor(2+(k-1)*2,:);
-        lammda=log(y1./y0);
-        
-[pf pd]=f(y0,y1,lammda,sensorT(k));
-y=C10*P0+C11*P1+
