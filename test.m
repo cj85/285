@@ -12,7 +12,7 @@ CF=P0*(C10-C00);CD=P1(C01-C11);
 C=C01*P1+C00*P0;
 RESOLUTION=.01;
 STOP=0;
-SENSORNUMBER=2;
+SENSORNUMBER=7;
 x=-10:RESOLUTION:14;
 y11=pdf(1,x);
 y10=pdf(0,x);
@@ -33,24 +33,22 @@ sensor=[y11;y10;y21;y20;y31;y30;y41;y40;y51;y50;y61;y60;y71;y70];
 
 
 bestdecision=ceil(randn(2^SENSORNUMBER,1)*.1);
-
-sensorT=[0 0 0 0 0 0 0];
+sensorT=randn(1,SENSORNUMBER)*2;
 breaksign=1;
 while (breaksign==1)
     [R_B bestdecision(:,1)]=RB(sensoru(SENSORNUMBER),bestdecision, sensor,sensorT);
-%     R_B
     for k=1:1:SENSORNUMBER
         sensorT=Tsensor(k,sensoru(SENSORNUMBER),sensor,sensorT,bestdecision);
     end
-    
     [R_B2 tmp]=RB(sensoru(SENSORNUMBER),bestdecision, sensor,sensorT);
-   
     if(R_B-R_B2<=STOP)
         breaksign=0;
     end
 end
-% R_B2
-% bestdecision
+ 
+
+sensorT
+ROC(sensor,sensorT);
 
    
 %     x1(i)=P0;

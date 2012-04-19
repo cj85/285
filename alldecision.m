@@ -1,2 +1,2 @@
 function out=alldecision(numberofsensor)
-out=sensoru(numberofsensor^2);
+out=sensoru(2^numberofsensor);
